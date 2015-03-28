@@ -1,16 +1,42 @@
-<!DOCTYPE html>
+<!doctype html>
 
-<html>
-
+<html lang="en">
 <head>
-  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-  <title>Agility.js demo page</title>
+    <meta charset="utf-8">
+
+    <title>HasOffers Coding Test</title>
+    <meta name="description" content="HasOffers Developer Challenge">
+    <meta name="author" content="Jay Billings">
+
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-  <script src="js/agility.min.js" type="text/javascript" charset="utf-8"></script>
-  <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="js/agility.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
+
+    <script id="employee-card-template" type="text/html">
+        <article class="employee-card">
+            <div class="header">
+                <img data-bind="src=path" />
+                <div class="name" data-bind="name"></div>
+                <div class="role" data-bind="role"></div>
+            </div>
+            <div class="body">
+                <div class="body-right">
+                    <div>Conversions <span class="conversions-timeframe" data-bind="timeframe"></span></div>
+                </div>
+                <div class="body-left">
+                    <span class="num-impressions" data-bind="impressions"></span>
+                    <span>impressions</span>
+                    <span class="conversions" data-bind="conversions"></span>
+                    <span>conversions</span>
+                    <span class="total" data-bind="total"></span>
+                </div>
+            </div>
+        </article>
+    </script>
 </body>
 
 </html>
