@@ -9,7 +9,6 @@ body {
 .employee-card {
     display: inline-block;
     width: 300px;
-    height: 150px;
     border: 5px solid $black;
     background: $white;
     color: $black;
@@ -60,13 +59,53 @@ body {
         .role {
             display: inline-block;
             margin-left: 15px;
-            font-size: 1em;
+            font-size: 1.1em;
             color: $gray;
             font-weight: bold;
         }
     }
 }
 
-.stats {
-    display: inline-block;
+.body {
+    font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Light", Helvetica, Arial, sans-serif;
+    .chart {
+        display: inline-block;
+        position: relative;
+        color: $gray;
+        div {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            margin-top: 4.5em;
+            text-align: center;
+            text-transform: capitalize;
+        }
+    }
+
+    .stats {
+        display: inline-block;
+        width: 35%;
+        text-align: right;
+        color: $lightGray;
+        text-transform: lowercase;
+        line-height: .9em;
+        span {
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+        .impressions {
+            color: $orange;
+        }
+        .conversions {
+            display: inline-block;
+            color: $blue;
+            padding-top: 7px;
+        }
+        .revenue {
+            display: inline-block;
+            color: $green;
+            font-size: 1.5em;
+            padding-top: 15px;
+        }
+    }
 }

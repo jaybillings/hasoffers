@@ -28,13 +28,16 @@
                 </div>
             </div>
             <div class="body">
-                <canvas class="conversions-chart" width="150px" height="70px"></canvas>
+                <div class="chart">
+                    <canvas class="conversions-chart" width="180px" height="80px"></canvas>
+                    <div class="chart-label">conversions <span data-bind="start"></span> - <span data-bind="end"></span></div>
+                </div>
                 <div class="stats">
-                    <span class="num impressions" data-bind="total-impressions">&nbsp;</span>
+                    <span class="impressions" data-bind="impressions"></span>
                     impressions
-                    <span class="num conversions" data-bind="total-conversions">&nbsp;</span>
+                    <span class="conversions" data-bind="totalConversions"></span>
                     conversions
-                    <span class="revenue" data-bind="revenue">&nbsp;</span>
+                    <span class="revenue" data-bind="revenue"></span>
                 </div>
             </div>
         </div>

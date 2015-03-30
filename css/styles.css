@@ -6,7 +6,6 @@ body {
 .employee-card {
   display: inline-block;
   width: 300px;
-  height: 150px;
   border: 5px solid black;
   background: white;
   color: black;
@@ -49,9 +48,41 @@ body {
     .header .title .role {
       display: inline-block;
       margin-left: 15px;
-      font-size: 1em;
+      font-size: 1.1em;
       color: #7f8c8d;
       font-weight: bold; }
 
-.stats {
-  display: inline-block; }
+.body {
+  font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Light", Helvetica, Arial, sans-serif; }
+  .body .chart {
+    display: inline-block;
+    position: relative;
+    color: #7f8c8d; }
+    .body .chart div {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      margin-top: 4.5em;
+      text-align: center;
+      text-transform: capitalize; }
+  .body .stats {
+    display: inline-block;
+    width: 35%;
+    text-align: right;
+    color: #ccd1d4;
+    text-transform: lowercase;
+    line-height: .9em; }
+    .body .stats span {
+      font-weight: bold;
+      font-size: 1.3em; }
+    .body .stats .impressions {
+      color: #e78100; }
+    .body .stats .conversions {
+      display: inline-block;
+      color: #4d95c5;
+      padding-top: 7px; }
+    .body .stats .revenue {
+      display: inline-block;
+      color: #2ca84b;
+      font-size: 1.5em;
+      padding-top: 15px; }

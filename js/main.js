@@ -1,30 +1,4 @@
-$(document).ready(function () {
-    console.log("!!!!!!!")
-});
-
 /* === Individual employee card === */
-
-var chart = $$({
-    model: {},
-    view: {
-        format: '<canvas class="conversions-chart" width="150px" height="70px"></canvas>'
-    },
-    controller: {
-        'create': function () {
-            if (!this.model.get('id')) return false;
-
-            var me = this,
-                id = 'chart-' + this.model.get('id');
-
-            this.view.$().attr('id', id);
-
-            setTimeout(function () {
-                renderChart(me.view.$(), me.model.get('conversions'));
-            }, 5000);
-
-        }
-    }
-});
 
 var card = $$({
     model: {},
@@ -33,16 +7,47 @@ var card = $$({
     },
     controller: {
         'create': function () {
+            // Need to check this because the function runs once
+            // before object instantiation
             if (!this.model.get('conversions')) return false;
-            var me = this;
-            // Set avatar url
+
+            var me = this,
+                sortedConversions,
+                startDate,
+                endDate,
+                revenue;
+
+            // Set model data
+            sortedConversions = me.model.get('conversions').sort(function (a, b) {
+                var date1 = new Date(a.time),
+                    date2 = new Date(b.time);
+                if (date1 < date2) {
+                    return -1;
+                } else if (date1 > date2) {
+                    return 1;
+                }
+                return 0;
+            });
+
+            startDate = new Date(sortedConversions[0].time);
+            endDate = new Date(sortedConversions[sortedConversions.length - 1].time);
+            revenue = (Math.round(this.model.get('revenue'))).toString();
+
+            this.model.set({
+                revenue: '$' + revenue.slice(0, -3) + ',' + revenue.slice(-3),
+                conversions: sortedConversions,
+                totalConversions: me.model.get('conversions').length,
+                start: startDate.getMonth() + '/' + startDate.getDay(),
+                end: endDate.getMonth() + '/' + endDate.getDay()
+            });
+
+            // Set avatar
             if (this.model.get('avatar') !== '') {
                 this.view.$('.avatar span').css('display', 'none');
             }
             this.view.$('.avatar').css('background-image', 'url(' + this.model.get('avatar') + ')');
 
-            this.model.set({'revenue': '$' + Math.round(this.model.get('revenue'))});
-
+            // Create chart once DOM is loaded
             setTimeout(function () {
                 renderChart(me.view.$('canvas'), me.model.get('conversions'));
             }, 1000);
@@ -53,9 +58,7 @@ var card = $$({
 /* === Employee Chart === */
 
 var employeeChart = $$({
-    model: {
-        users: []
-    },
+    model: {},
     view: {
         format: '<div class="employee-chart"></div>'
     },
@@ -82,18 +85,19 @@ var employeeChart = $$({
             // Get logs.json data
             req2 = $.getJSON('data/logs.json', function (data) {
                 $.each(data, function (i, val) {
-                    if (!usersData[val['user_id']]) {
-                        usersData[val['user_id']] = {
+                    var id = val['user_id'];
+                    if (!usersData[id]) {
+                        usersData[id] = {
                             impressions: 0,
                             conversions: [],
                             revenue: 0
                         };
                     }
                     if (val.type === 'impression') {
-                        usersData[val['user_id']].impressions += 1;
+                        usersData[id].impressions += 1;
                     } else {
-                        usersData[val['user_id']].revenue += val.revenue;
-                        usersData[val['user_id']].conversions.push({
+                        usersData[id].revenue += val.revenue;
+                        usersData[id].conversions.push({
                             'time': val.time,
                             'revenue': val.revenue
                         });
@@ -101,9 +105,8 @@ var employeeChart = $$({
                 })
             });
             $.when(req1, req2).done(function () {
-                $.each(usersData, function(i, val) {
-                    var newCard = $$(card, val);
-                    me.append(newCard);
+                $.each(usersData, function(i, val) {;
+                    me.append($$(card, val));
                 })
             });
         }
@@ -111,13 +114,15 @@ var employeeChart = $$({
 });
 $$.document.append(employeeChart);
 
-/* === Chart functions === */
+/* === Chart rendering === */
+
 var renderChart = function (chartView, conversions) {
     var ctx = chartView.get(0).getContext("2d"),
         options = {
             animation: false,
             bezierCurve: false,
             pointDot: false,
+            showTooltips: false,
             scaleGridLineColor: 'rgba(0,0,0,0)',
             scaleLineColor: 'rgba(0,0,0,0)',
             scaleShowGridLines: false,
@@ -125,22 +130,21 @@ var renderChart = function (chartView, conversions) {
         },
         data = [],
         labels = [],
-        sortedData,
+        condensedData = {},
         chartData;
 
-    sortedData = conversions.sort(function (a, b) {
-        var date1 = new Date(a.time),
-            date2 = new Date(b.time);
-        if (date1 < date2) {
-            return -1;
-        } else if (date1 > date2) {
-            return 1;
+    // Only want daily totals or the chart is unreadable
+    conversions.forEach(function(val) {
+        var date = val.time.split(' ')[0];
+        if (condensedData[date]) {
+            condensedData[date] += val.revenue;
+        } else {
+            condensedData[date] = val.revenue;
         }
-        return 0;
     });
 
-    sortedData.forEach(function(val, i) {
-        data.push(val.revenue);
+    $.each(condensedData, function (i, val) {
+        data.push(val);
         labels.push('');
     });
 
@@ -153,5 +157,5 @@ var renderChart = function (chartView, conversions) {
         }]
     };
 
-    chart = new Chart(ctx).Line(chartData, options);
+    new Chart(ctx).Line(chartData, options);
 };
