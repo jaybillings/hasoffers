@@ -1,0 +1,15 @@
+=== TO RUN ===
+
+With Node.js
+
+* In a terminal, navigate to the project's root
+* Type 'node.js app.js'
+* In browser, navigate to http://localhost:3000/index.html
+
+With Python
+
+* In terminal, navigate to the /public directory within the project root
+* Type 'python -m SimpleHTTPServer 3000'
+* In browser, navigate to http://localhost:3000/index.html
+
+Enjoy!
