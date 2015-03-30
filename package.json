@@ -1,0 +1,27 @@
+{
+  "name": "hasoffers",
+  "version": "1.0.0",
+  "description": "Coding test for HasOffers",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jcbbillings/hasoffers.git"
+  },
+  "keywords": [
+    "toy",
+    "test"
+  ],
+  "author": "Jay Billings",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jcbbillings/hasoffers/issues"
+  },
+  "homepage": "https://github.com/jcbbillings/hasoffers",
+  "dependencies": {
+    "express": "^4.12.3",
+    "serve-static": "^1.9.2"
+  }
+}
