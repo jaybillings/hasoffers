@@ -1,3 +1,4 @@
+/* Retrieved from https://github.com/expressjs/serve-static */
 var express = require('express');
 var serveStatic = require('serve-static');
 
