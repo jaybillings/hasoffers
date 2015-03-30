@@ -14,29 +14,33 @@
 <body>
     <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
     <script src="js/agility.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/Chart.js" type="text/javascript"></script>
 
     <script id="employee-card-template" type="text/html">
-        <article class="employee-card">
+        <div class="employee-card">
             <div class="header">
-                <img data-bind="src=path" />
-                <div class="name" data-bind="name"></div>
-                <div class="role" data-bind="role"></div>
+                <div class="avatar">
+                    <span data-bind="initial"></span>
+                </div>
+                <div class="title">
+                    <div class="name" data-bind="name"></div>
+                    <div class="role" data-bind="occupation"></div>
+                </div>
             </div>
             <div class="body">
-                <div class="body-right">
-                    <div>Conversions <span class="conversions-timeframe" data-bind="timeframe"></span></div>
-                </div>
-                <div class="body-left">
-                    <span class="num-impressions" data-bind="impressions"></span>
-                    <span>impressions</span>
-                    <span class="conversions" data-bind="conversions"></span>
-                    <span>conversions</span>
-                    <span class="total" data-bind="total"></span>
+                <canvas class="conversions-chart" width="150px" height="70px"></canvas>
+                <div class="stats">
+                    <span class="num impressions" data-bind="total-impressions">&nbsp;</span>
+                    impressions
+                    <span class="num conversions" data-bind="total-conversions">&nbsp;</span>
+                    conversions
+                    <span class="revenue" data-bind="revenue">&nbsp;</span>
                 </div>
             </div>
-        </article>
+        </div>
     </script>
+
+    <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
 </body>
 
 </html>

@@ -1,2 +1,57 @@
 body {
-  color: gray; }
+  background: #7f8c8d;
+  font-family: 'Arial Neue', arial, helvetica, sans-serif;
+  font-size: 14px; }
+
+.employee-card {
+  display: inline-block;
+  width: 300px;
+  height: 150px;
+  border: 5px solid black;
+  background: white;
+  color: black;
+  padding: 15px;
+  margin: 10px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px; }
+
+.header {
+  vertical-align: middle;
+  display: inline-block;
+  height: 80px;
+  width: 100%;
+  text-transform: capitalize; }
+  .header .avatar {
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    background-color: #9b59b6;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    margin-right: 10px; }
+    .header .avatar span {
+      display: inline-block;
+      width: 100%;
+      color: white;
+      text-align: center;
+      font-size: 3.5em;
+      line-height: 80px; }
+  .header .title {
+    display: inline-block;
+    width: 68%;
+    vertical-align: top;
+    margin-top: 1em; }
+    .header .title .name {
+      font-size: 1.6em;
+      font-weight: bold;
+      color: #2b3e4f; }
+    .header .title .role {
+      display: inline-block;
+      margin-left: 15px;
+      font-size: 1em;
+      color: #7f8c8d;
+      font-weight: bold; }
+
+.stats {
+  display: inline-block; }
